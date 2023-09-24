@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Insert</title>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+         $(document).ready(function () {
+            $("#stdForm").submit(function (event) {
+               event.preventDefault();
+               var formData = $(this).serialize();
+               $.ajax({
+                  type: "POST",
+                  url: "insert_std.php",
+                  data: formData,
+                  success: function (response) {
+                     if (response === "success") {
+                        alert("Insert New Record Successfully!");
+                        window.location.href = "student.php";
+                     } else {
+                        alert("Error: " + response);
+                     }
+                  },
+               });
+            });
+         });
+      </script>
+   </head>
+   <body>
+      <h1>Insert</h1>
+      <form id="stdForm">
+         ID:<input type="text" name="id" required /><br />
+         Name:<input type="text" name="en_name" required /><br />
+         Surname:<input type="text" name="en_surname" required /> <br />
+         ชื่อ:<input type="text" name="th_name" required /><br />
+         นามสกุล:<input type="text" name="th_surname" required /> <br />
+         Major_code:<input type="text" name="major_code" /><br />
+         Email:<input type="email" name="email" /><br />
+         <input type="submit" />
+         <input type="reset" />
+      </form>
+   </body>
+</html>
